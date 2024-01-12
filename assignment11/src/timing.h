@@ -36,6 +36,8 @@
 #include <chrono>  // for microseconds
 #include <random>
 
+#include "MemoryLeakDetector.h"
+
 using namespace std;
 using namespace std::chrono;
 

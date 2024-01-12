@@ -28,7 +28,6 @@
 //  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 //  OTHER DEALINGS IN THE SOFTWARE.
 
-#define CATCH_CONFIG_RUNNER
 #include <algorithm>  // for sort()
 #include <iostream>
 #include <random>
@@ -36,7 +35,6 @@
 #include "PPlot.h"
 #include "SVGPainter.h"
 #include "bst.h"
-#include "catch.h"
 #include "timing.h"
 
 using namespace std;
@@ -106,12 +104,7 @@ static void drawSearchChart() {
 
 // Test all code and draw charts.
 int main(int argc, char *argv[]) {
-  // run tests
-  int result = Catch::Session().run(argc, argv);
-
   cout << "Generating chart..." << endl;
   // draw chart
   drawSearchChart();
-
-  return result;
 }

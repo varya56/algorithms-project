@@ -29,9 +29,10 @@
 #define dynamicarray_hpp
 
 #include <algorithm>  // for copy(), min(), move_backward
-#include <cassert>    // for assert()
+                      // for assert()
 
 #include "Collection.h"
+#include "MemoryLeakDetector.h"
 
 #define DEFAULT_CAPACITY 10
 

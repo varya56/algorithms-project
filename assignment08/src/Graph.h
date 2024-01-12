@@ -29,7 +29,6 @@
 #ifndef graph_hpp
 #define graph_hpp
 
-#include <cassert>
 #include <iostream>
 #include <list>
 #include <optional>
@@ -37,6 +36,8 @@
 #include <stack>
 #include <unordered_map>
 #include <unordered_set>
+
+#include "MemoryLeakDetector.h"
 
 using namespace std;
 

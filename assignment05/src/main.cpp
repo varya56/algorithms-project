@@ -28,7 +28,6 @@
 //  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 //  OTHER DEALINGS IN THE SOFTWARE.
 
-#define CATCH_CONFIG_RUNNER
 #include <algorithm>  // for sort()
 #include <array>
 #include <chrono>  // for microseconds
@@ -37,7 +36,6 @@
 
 #include "PPlot.h"
 #include "SVGPainter.h"
-#include "catch.h"
 #include "sort.h"
 
 using namespace std;
@@ -217,12 +215,7 @@ static void drawSortChart() {
 
 // Test all code and draw charts.
 int main(int argc, char *argv[]) {
-  // run tests
-  int result = Catch::Session().run(argc, argv);
-
   cout << "Generating chart..." << endl;
   // draw chart
   drawSortChart();
-
-  return result;
 }

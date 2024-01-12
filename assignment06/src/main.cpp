@@ -28,15 +28,13 @@
 //  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 //  OTHER DEALINGS IN THE SOFTWARE.
 
-#define CATCH_CONFIG_RUNNER
-#include "catch.h"
+#include <iostream>
 
-using namespace std;
+#include "HashTable.h"
 
-// Test all code
 int main(int argc, char* argv[]) {
-  // run tests
-  int result = Catch::Session().run(argc, argv);
-
-  return result;
+  // just a plain simple test, use the other file for extensive tests
+  csi281::HashTable<std::string, int> ht;
+  ht.put("age", 5);
+  std::cout << ht.get("age").value() << std::endl;
 }

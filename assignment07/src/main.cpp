@@ -28,15 +28,9 @@
 //  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 //  OTHER DEALINGS IN THE SOFTWARE.
 
-#define CATCH_CONFIG_RUNNER
-#include "catch.h"
-
 using namespace std;
+#include "MemoryLeakDetector.h"
 
-// Test all code
 int main(int argc, char* argv[]) {
-  // run tests
-  int result = Catch::Session().run(argc, argv);
-
-  return result;
+  // create your small scoped tests here if you want
 }

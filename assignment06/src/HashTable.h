@@ -35,6 +35,8 @@
 #include <optional>
 #include <utility>  // for pair
 
+#include "MemoryLeakDetector.h"
+
 #define DEFAULT_CAPACITY 10
 #define MAX_LOAD_FACTOR 0.7
 

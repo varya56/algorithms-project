@@ -33,6 +33,7 @@
 #include <string>
 
 #include "CityTemperatureData.h"
+#include "MemoryLeakDetector.h"
 
 using namespace std;
 

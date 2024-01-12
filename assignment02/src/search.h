@@ -29,6 +29,8 @@
 #ifndef search_hpp
 #define search_hpp
 
+#include "MemoryLeakDetector.h"
+
 namespace csi281 {
 
   // Returns the first location of the found key

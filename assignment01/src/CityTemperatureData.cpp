@@ -27,8 +27,6 @@
 
 #include "CityTemperatureData.h"
 
-#include <cassert>
-
 using namespace std;
 
 namespace csi281 {

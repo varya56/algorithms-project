@@ -31,6 +31,8 @@
 #include <chrono>   // for nanoseconds
 #include <utility>  // for pair
 
+#include "MemoryLeakDetector.h"
+
 using namespace std;
 using namespace std::chrono;
 

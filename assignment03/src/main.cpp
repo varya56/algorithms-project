@@ -28,7 +28,6 @@
 //  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 //  OTHER DEALINGS IN THE SOFTWARE.
 
-#define CATCH_CONFIG_RUNNER
 #include <chrono>  // for nanoseconds
 #include <iostream>
 #include <random>
@@ -36,9 +35,9 @@
 
 #include "DynamicArray.h"
 #include "LinkedList.h"
+#include "MemoryLeakDetector.h"
 #include "PPlot.h"
 #include "SVGPainter.h"
-#include "catch.h"
 
 using namespace std;
 using namespace std::chrono;
@@ -166,11 +165,6 @@ static void drawSearchChart() {
 
 // Test all code and draw charts.
 int main(int argc, char *argv[]) {
-  // run tests
-  int result = Catch::Session().run(argc, argv);
-
   // draw chart
   drawSearchChart();
-
-  return result;
 }

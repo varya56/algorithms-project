@@ -28,9 +28,8 @@
 #ifndef linkedlist_hpp
 #define linkedlist_hpp
 
-#include <cassert>
-
 #include "Collection.h"
+#include "MemoryLeakDetector.h"
 
 using namespace std;
 

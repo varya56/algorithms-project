@@ -31,6 +31,8 @@
 #include <iostream>
 #include <list>
 
+#include "MemoryLeakDetector.h"
+
 using namespace std;
 
 namespace csi281 {

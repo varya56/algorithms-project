@@ -30,7 +30,6 @@
 #define weighted_graph_hpp
 
 #include <algorithm>
-#include <cassert>
 #include <iostream>
 #include <list>
 #include <queue>
@@ -38,6 +37,8 @@
 #include <unordered_set>
 #include <utility>
 #include <vector>
+
+#include "MemoryLeakDetector.h"
 
 using namespace std;
 

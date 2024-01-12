@@ -36,6 +36,7 @@
 #include <random>
 #include <vector>
 
+#include "MemoryLeakDetector.h"
 #include "PriorityQueue.h"
 
 using namespace std;

@@ -33,10 +33,11 @@
 #define pq_hpp
 
 #include <algorithm>  // for swap()
-#include <cassert>
 #include <iostream>
 #include <random>
 #include <vector>
+
+#include "MemoryLeakDetector.h"
 
 using namespace std;
 

@@ -34,13 +34,6 @@
 #include "SVGPainter.h"
 #include "util.h"
 
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include <doctest/doctest.h>
-#define SECTION(name) DOCTEST_SUBCASE(name)
-#undef TEST_CASE
-#define TEST_CASE(name, tags) DOCTEST_TEST_CASE(tags " " name)
-using doctest::Approx;
-
 using namespace std;
 using namespace csi281;
 using namespace SVGChart;
@@ -107,11 +100,6 @@ static void drawSearchChart() {
 
 // Test all code and draw charts.
 int main(int argc, char *argv[]) {
-  // run tests
-  int result = Catch::Session().run(argc, argv);
-
   // draw chart
   drawSearchChart();
-
-  return result;
 }

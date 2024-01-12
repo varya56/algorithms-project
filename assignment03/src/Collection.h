@@ -28,6 +28,8 @@
 #ifndef collections_hpp
 #define collections_hpp
 
+#include "MemoryLeakDetector.h"
+
 namespace csi281 {
 
   template <typename T> class Collection {
