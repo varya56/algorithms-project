@@ -11,8 +11,8 @@ list(REMOVE_ITEM TEST_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
 get_filename_component(ProjectId ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 
 # add executable
-add_executable(${ProjectId} ${EXE_SOURCES})
-add_executable(${ProjectId}_tests ${TEST_SOURCES})
+add_executable(${ProjectId} ${EXE_SOURCES} ${MLD_SRC})
+add_executable(${ProjectId}_tests ${TEST_SOURCES} ${MLD_SRC})
 
 # link the library
 target_link_libraries(${ProjectId} plotsvg)

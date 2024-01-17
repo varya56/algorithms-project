@@ -29,6 +29,11 @@ add_subdirectory(lib)
 include_directories(lib)
 link_directories(${CMAKE_CURRENT_BINARY_DIR}/lib)
 
+# memory leak tracker
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/MLD)
+set(MLD_H ${CMAKE_CURRENT_SOURCE_DIR}/MLD/MemoryLeakDetector.h)
+set(MLD_SRC ${CMAKE_CURRENT_SOURCE_DIR}/MLD/MemoryLeakDetector.cpp)
+
 # the assignment subdirectory will hold all of the assignments
 
 # todo for tolsta: make this simpler
