@@ -53,7 +53,7 @@ namespace csi281 {
   CityYear readLine(ifstream &file);
 
   // Read city by looking at the specified lines in the CSV
-  CityTemperatureData readCity(string cityName, string fileName, int startLine, int endLine);
+  CityTemperatureData* readCity(string cityName, string fileName, int startLine, int endLine);
 }  // namespace csi281
 
 #endif /* csv_hpp */

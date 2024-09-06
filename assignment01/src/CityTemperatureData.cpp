@@ -31,11 +31,14 @@ using namespace std;
 
 namespace csi281 {
   // Fill in all instance variables for CityTemperatureData.
+  // Data will be stored in an array of CityYear instances.
   CityTemperatureData::CityTemperatureData(const string name, CityYear data[], int numYears)
       : _name(name), _data(data), _count(numYears) {}
 
   // Release any memory connected to CityTemperatureData.
-  CityTemperatureData::~CityTemperatureData() {}
+  CityTemperatureData::~CityTemperatureData() {
+    delete _data;
+  }
 
   // Look up a CityYear instance held by CityTemperatureData by its year.
   // Find the right CityYear in the array and return it

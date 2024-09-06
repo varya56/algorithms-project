@@ -39,43 +39,47 @@ using namespace std;
 using namespace csi281;
 
 TEST_CASE("New York Test Data", "[New York]") {
-  CityTemperatureData nyc = readCity("NYC", "tempdata.csv", 1, 51);
+  CityTemperatureData* nyc = readCity("NYC", "tempdata.csv", 1, 51);
 
-  REQUIRE(nyc.count() == 51);
-  REQUIRE(nyc.getName() == "NYC");
-  REQUIRE(nyc.getFirstYear() == 1968);
+  REQUIRE(nyc->count() == 51);
+  REQUIRE(nyc->getName() == "NYC");
+  REQUIRE(nyc->getFirstYear() == 1968);
 
   SECTION("Accessing random elements.") {
-    CHECK(nyc[1970].numDaysBelow32 == 29);
-    CHECK(nyc[2011].averageTemperature == 56.4f);
-    CHECK(nyc[2000].averageMin == 46.9f);
-    CHECK(nyc[2018].averageMax == 62.6f);
+    CHECK((*nyc)[1970].numDaysBelow32 == 29);
+    CHECK((*nyc)[2011].averageTemperature == 56.4f);
+    CHECK((*nyc)[2000].averageMin == 46.9f);
+    CHECK((*nyc)[2018].averageMax == 62.6f);
   }
 
   SECTION("Correct Averages & Totals") {
-    CHECK(nyc.getAllTimeAverage() == Approx(55.25294118f).epsilon(0.01));
-    CHECK(nyc.getTotalDaysBelow32() == 967);
-    CHECK(nyc.getTotalDaysAbove90() == 891);
+    CHECK(nyc->getAllTimeAverage() == Approx(55.25294118f).epsilon(0.01));
+    CHECK(nyc->getTotalDaysBelow32() == 967);
+    CHECK(nyc->getTotalDaysAbove90() == 891);
   }
+
+  delete nyc;
 }
 
 TEST_CASE("Burlington Test Data", "[Burlington]") {
-  CityTemperatureData burlington = readCity("Burlington", "tempdata.csv", 52, 102);
+  CityTemperatureData* burlington = readCity("Burlington", "tempdata.csv", 52, 102);
 
-  REQUIRE(burlington.count() == 51);
-  REQUIRE(burlington.getName() == "Burlington");
-  REQUIRE(burlington.getFirstYear() == 1968);
+  REQUIRE(burlington->count() == 51);
+  REQUIRE(burlington->getName() == "Burlington");
+  REQUIRE(burlington->getFirstYear() == 1968);
 
   SECTION("Accessing random elements.") {
-    CHECK(burlington[1978].numDaysBelow32 == 87);
-    CHECK(burlington[1989].averageTemperature == 44.6f);
-    CHECK(burlington[2000].averageMin == 36.0f);
-    CHECK(burlington[2018].averageMax == 56.9f);
+    CHECK((*burlington)[1978].numDaysBelow32 == 87);
+    CHECK((*burlington)[1989].averageTemperature == 44.6f);
+    CHECK((*burlington)[2000].averageMin == 36.0f);
+    CHECK((*burlington)[2018].averageMax == 56.9f);
   }
 
   SECTION("Correct Averages & Totals") {
-    CHECK(burlington.getAllTimeAverage() == Approx(45.70589f).epsilon(0.01));
-    CHECK(burlington.getTotalDaysBelow32() == 3242);
-    CHECK(burlington.getTotalDaysAbove90() == 357);
+    CHECK(burlington->getAllTimeAverage() == Approx(45.70589f).epsilon(0.01));
+    CHECK(burlington->getTotalDaysBelow32() == 3242);
+    CHECK(burlington->getTotalDaysAbove90() == 357);
   }
+
+  delete burlington;
 }

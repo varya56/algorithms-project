@@ -84,7 +84,8 @@ namespace csi281 {
   // The ifstream method good() may be useful
   // Make sure to just read between startLine and endLine (inclusive of endLine)
   // Construct a CityTemperatureData and return it
-  CityTemperatureData readCity(string cityName, string fileName, int startLine, int endLine) {
-    // YOUR CODE HERE
+  // create an array of CityYear instances to pass to the CityTemperatureData constructor
+  // when the CityTemperatureData is created, it will take ownership of the array
+  CityTemperatureData* readCity(string cityName, string fileName, int startLine, int endLine) {
   }
 }  // namespace csi281
