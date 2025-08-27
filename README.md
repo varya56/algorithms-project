@@ -65,7 +65,7 @@ This material was originally developed by [@davecom](https://github.com/davecom)
 
 ### IDEs
 
-note: Tested on CLion and Visual Studio.
+note: Tested on CLion and Visual Studio. Git should be installed and available on your PATH. If you are unsure, open terminal and type git. If not found, install it.
 
 1. Open the `CMakeLists.txt` file as a project in your preferred IDE;
 2. On the targets, select the assignment you want to work on (e.g. `assignment01`);
