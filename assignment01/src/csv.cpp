@@ -73,8 +73,20 @@ namespace csi281 {
   // You'll want to use the standard library function getline()
   // and the readCell() functions above
   // You'll also want to construct a CityYear from what you have read from the file
-  CityYear readLine(ifstream &file) {
-    // YOUR CODE HERE
+  CityYear readLine(ifstream &file){
+    string line;
+    getline(file, line);
+    istringstream iss(line);
+    CityYear temp_year;
+    line = readStringCell(iss);
+    line = readStringCell(iss);
+    temp_year.year = readIntCell(iss);
+    temp_year.numDaysBelow32 = readIntCell(iss);
+    temp_year.numDaysAbove90 = readIntCell(iss);
+    temp_year.averageTemperature = readFloatCell(iss);
+    temp_year.averageMax = readFloatCell(iss);
+    temp_year.averageMin = readFloatCell(iss);
+    return temp_year;
   }
 
   // Read city by looking at the specified lines in the CSV
@@ -87,5 +99,20 @@ namespace csi281 {
   // create an array of CityYear instances to pass to the CityTemperatureData constructor
   // when the CityTemperatureData is created, it will take ownership of the array
   CityTemperatureData* readCity(string cityName, string fileName, int startLine, int endLine) {
+    ifstream file(fileName);
+    if (!file.is_open()) {
+      cout << "File " << fileName << " does not exist." << endl;
+    }
+    string temp;
+    for (int i = 0; i < startLine && file.good(); ++i) {
+      getline(file, temp);
+    }
+    int numYears = endLine - startLine + 1;
+    CityYear* years = new CityYear[numYears];
+
+    for (int i = 0; i < numYears && file.good(); ++i) {
+      years[i] = readLine(file);
+    }
+    return new CityTemperatureData(cityName, years, numYears);
   }
 }  // namespace csi281

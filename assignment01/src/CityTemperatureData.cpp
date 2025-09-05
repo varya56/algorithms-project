@@ -33,7 +33,8 @@ namespace csi281 {
   // Fill in all instance variables for CityTemperatureData.
   // Data will be stored in an array of CityYear instances.
   CityTemperatureData::CityTemperatureData(const string name, CityYear data[], int numYears)
-      : _name(name), _data(data), _count(numYears) {}
+      : _name(name), _data(data), _count(numYears) {
+  }
 
   // Release any memory connected to CityTemperatureData.
   CityTemperatureData::~CityTemperatureData() {
@@ -43,22 +44,41 @@ namespace csi281 {
   // Look up a CityYear instance held by CityTemperatureData by its year.
   // Find the right CityYear in the array and return it
   const CityYear CityTemperatureData::operator[](const int year) const {
-    // YOUR CODE HERE
+    for (int i = 0; i < _count; i++) {
+      if (_data[i].year == year) {
+        return _data[i];
+      }
+    }
+    throw std::out_of_range("Year is not found");
   }
-
   // Get the average (mean) temperature of all time for this city
   // by averaging every CityYear.
   float CityTemperatureData::getAllTimeAverage() const {
-    // YOUR CODE HERE
+    if (_count == 0) {
+      return 0;
+    }
+    float sum = 0;
+    for (int i = 0; i < _count; i++) {
+      sum += _data[i].averageTemperature;
+    }
+    return sum / _count;;
   }
 
   // Sum all of the days below 32 for all years.
   int CityTemperatureData::getTotalDaysBelow32() const {
-    // YOUR CODE HERE
+    int totalDays = 0;
+    for (int i = 0; i < _count; i++) {
+      totalDays += _data[i].numDaysBelow32;
+    }
+    return totalDays;
   }
 
   // Sum all of the days above 90 for all years.
   int CityTemperatureData::getTotalDaysAbove90() const {
-    // YOUR CODE HERE
+   int totalDays = 0;
+    for (int i = 0; i < _count; i++) {
+      totalDays += _data[i].numDaysAbove90;
+    }
+    return totalDays;
   }
 }  // namespace csi281
