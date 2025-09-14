@@ -36,12 +36,20 @@
 using namespace std;
 
 namespace csi281 {
-
   // Returns a new int array of *length* and filled
   // with numbers between *min* and *max*
   // Suggest using the facilities in STL <random>
   int *randomIntArray(const int length, const int min, const int max) {
-    // YOUR CODE HERE
+    int* array = new int[length];
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> dis(min, max);
+
+    for (int i = 0; i < length; i++) {
+      array[i] = dis(gen);
+    }
+    return array;
   }
 
   // Finds the speed of linear versus binary search
@@ -70,14 +78,57 @@ namespace csi281 {
 
     // YOUR CODE HERE
 
+    long long totalLinearTime = 0;
+
+    for (int i = 0; i < numTests; i++) {
+      auto start = duration_cast< nanoseconds >(system_clock::now().time_since_epoch()).count();
+      bool found = false;
+      for (int j = 0; j < length; j++) {
+        if (testArray[j] == testKeys[i]) {
+          found = true;
+          break;
+        }
+      }
+      auto end = duration_cast< nanoseconds >(system_clock::now().time_since_epoch()).count();
+      totalLinearTime += end - start;
+    }
+
+    long long linearSearchSpeed = totalLinearTime / numTests;
+
     // Do numTests binary searches and find the average time
     // Put the result in a variable binarySearchSpeed
 
     // YOUR CODE HERE
+    std::sort(testArray, testArray + length);
+
+    long long totalBinaryTime = 0;
+
+    for (int i = 0; i < numTests; i++) {
+      auto start = duration_cast< nanoseconds >(system_clock::now().time_since_epoch()).count();
+      bool found = false;
+      int left = 0, right = length - 1;
+      while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (testArray[mid] == testKeys[i]) {
+          found = true;
+          break;
+        }
+        if (testArray[mid] < testKeys[i]) {
+          left = mid + 1;
+        } else {
+          right = mid - 1;
+        }
+      }
+      auto end = duration_cast< nanoseconds >(system_clock::now().time_since_epoch()).count();
+      totalBinaryTime += end - start;
+    }
+
+    long long binarySearchSpeed = totalBinaryTime / numTests;
 
     delete testArray;
     delete testKeys;
 
     return pair<nanoseconds, nanoseconds>(linearSearchSpeed, binarySearchSpeed);
   }
-}  // namespace csi281
+}
+// namespace csi281
