@@ -30,6 +30,7 @@
 
 #include "Collection.h"
 #include "MemoryLeakDetector.h"
+#include <cassert>
 
 using namespace std;
 
@@ -54,29 +55,64 @@ namespace csi281 {
     // Return -1 if it is not found
     int find(const T &item) {
       // YOUR CODE HERE
+      int index = 0;
+      for (Node *current = head; current != nullptr; current = current->next) {
+        if (current->data == item) {
+          return index;
+        }
+        index++;
+      }
+      return -1;
     }
 
     // Get the item at a particular index
     T &get(int index) {
       assert(index < count);  // can't insert off end
-      assert(index >= 0);     // no negative indices
-                              // YOUR CODE HERE
+      assert(index >= 0);// no negative indices
+      // YOUR CODE HERE
+      int currentIndex = 0;
+      for (Node *current = head; current != nullptr; current = current->next) {
+        if (currentIndex == index) {
+          return current->data;
+        }
+        currentIndex++;
+      }
+      assert(false && "Index out of bounds");
     }
 
     // Insert at the beginning of the collection
     void insertAtBeginning(const T &item) {
       // YOUR CODE HERE
+      Node *newNode = new Node(item);
+      newNode->next = head;
+      head = newNode;
+      if (tail == nullptr) {
+        tail = newNode;
+      }
+      ++count;
     }
 
     // Insert at the end of the collection
     void insertAtEnd(const T &item) {
       // YOUR CODE HERE
+      Node *newNode = new Node(item);
+
+      if (head == nullptr) {
+        head = newNode;
+        tail = newNode;
+        ++count;
+      } else {
+        tail->next = newNode;
+        tail = newNode;
+        ++count;
+      }
     }
 
     // Insert at a specific index
     void insert(const T &item, int index) {
       assert(index <= count);  // can't insert off end
       assert(index >= 0);      // no negative indices
+      // YOUR CODE HERE
       if (index == 0) {
         insertAtBeginning(item);
         return;
@@ -92,7 +128,7 @@ namespace csi281 {
           Node *thing = new Node(item);
           current->next = thing;
           thing->next = after;
-          count++;
+          ++count;
           return;
         }
         location++;
@@ -103,12 +139,41 @@ namespace csi281 {
     void removeAtBeginning() {
       assert(count > 0);
       // YOUR CODE HERE
+      if (head == nullptr) {
+        return;
+      }
+      Node *nodeToDelete = head;
+      head = head->next;
+      if (head == nullptr) {
+        tail = nullptr;
+      }
+      delete nodeToDelete;
+      --count;
     }
 
     // Remove the item at the end of the collection
     void removeAtEnd() {
       assert(count > 0);
       // YOUR CODE HERE
+      if (head == nullptr) {
+        return;
+      }
+      if (head == tail) {
+        delete head;
+        head = nullptr;
+        tail = nullptr;
+        --count;
+        return;
+      }
+      Node *current = head;
+      while (current->next != tail) {
+        current = current->next;
+      }
+
+      delete tail;
+      tail = current;
+      tail->next = nullptr;
+      --count;
     }
 
     // Remove the item at a specific index
@@ -131,7 +196,7 @@ namespace csi281 {
           Node *after = current->next->next;
           delete (current->next);
           current->next = after;
-          count--;
+          --count;
           return;
         }
         location++;
