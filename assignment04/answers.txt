@@ -1,0 +1,39 @@
+Varya Trakht
+
+1. Why is bubbleSort() slower than selectionSort() and insertionSort()?
+Please explain your answer (succinctly).
+
+All three algorithms have the same time complexity of O(n²).
+However, bubble sort is slower than selection sort and insertion sort because
+it performs a greater number of swaps, even if elements are already in
+their correct positions, each element passes through the array
+multiple times to reach its final position.
+
+2. Why is an optimized insertionSort() faster than selectionSort()?
+Please explain your answer (succinctly).
+
+Insertion Sort generally performs better on nearly sorted data, due to fewer swaps and comparisons,
+making it more efficient in average scenarios.
+It places each element directly into its correct position within the sorted part of array.
+Also, Insertion Sort has the best-case time complexity of O(n) when the input array is
+already sorted, which is not possible for Selection Sort.
+Tends to perform better than Bubble and Selection sorts for small datasets.
+
+
+3. What property does a custom class need to have for it to be usable in an array with the three sort methods you implemented?
+Give a name to the concept and also explain specifically in C++ what would need to be implemented.
+
+The concept of making a custom class usable in an array with the three sorting methods is comparison.
+This can be implemented using operator overloading for comparison operators (<, >, ==, etc.),
+which allows the sorting algorithm to determine the order of elements.
+Also, the operators must be const methods since sorting algorithms do not modify the objects during comparison.
+For example:
+(bool operator<(const Class& other) const {})
+
+4. Why is std::sort so much faster than any of our implementations? Is it primarily because it is better optimized, or is it something more fundamental?
+
+std::sort is so much faster than any of our implementations because it uses not only one algorithm,
+but a combination (insertion sort, quick sort and heap sort), choosing the optimal strategy for each specific situation.
+As it uses the above sorting algorithms, its average time complexity turns out to be O(n log n) with
+guaranteed O(n log n) worst-case performance.
+So, the difference comes from a fundamentally different algorithmic approach rather than just optimizations.
