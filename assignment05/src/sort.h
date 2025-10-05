@@ -49,7 +49,13 @@ namespace csi281 {
   // http://www.cplusplus.com/reference/algorithm/inplace_merge/
   template <typename T> void mergeSort(T array[], const int start, const int end) {
     // YOUR CODE HERE
+    if (start >= end) {
+      return;
+    }
     int mid = start + (end - start) / 2;
+    mergeSort(array, start, mid);
+    mergeSort(array, mid + 1, end);
+    std::inplace_merge(array + start, array + mid + 1, array + end + 1);
   }
 
   // setup random number generator
@@ -71,6 +77,34 @@ namespace csi281 {
   // the appropriate place
   template <typename T> void quickSort(T array[], const int start, const int end) {
     // YOUR CODE HERE
+    if (start >= end) {
+      return;
+    }
+
+    uniform_int_distribution<int> dist(start, end);
+    int pivotIndex = dist(rng);
+
+    std::swap(array[start], array[pivotIndex]);
+
+    int pivot = start;
+    int l = start + 1;
+    int r = end;
+
+    while (l <= r) {
+      if (array[l] <= array[pivot]) {
+        l++;
+      }
+      else if (array[r] > array[pivot]) {
+        r--;
+      }
+      else {
+        std::swap(array[l], array[r]);
+      }
+    }
+    std::swap(array[pivot], array[r]);
+
+    quickSort(array, start, r - 1);
+    quickSort(array, r + 1, end);
   }
 
   // Performs an in-place ascending sort of *array*
@@ -87,6 +121,18 @@ namespace csi281 {
   // sort part of the array as per the parameters of this version
   template <typename T> void insertionSort(T array[], const int start, const int end) {
     // YOUR CODE HERE
+    if (start >= end) {
+      return;
+    }
+    for (int i = start + 1; i <= end; i++) {
+      T key = array[i];
+      int j = i - 1;
+      while (j >= start && array[j] > key) {
+        array[j + 1] = array[j];
+        j = j - 1;
+      }
+      array[j + 1] = key;
+    }
   }
 
   // Performs an in-place ascending sort of *array*
@@ -99,8 +145,21 @@ namespace csi281 {
   // should be able to call the insertionSort above
   template <typename T> void hybridSort(T array[], const int start, const int end) {
     // YOUR CODE HERE
+    if (start >= end) {
+      return;
+    }
+    int arraySize = end - start + 1;
+    if (arraySize < 10) {
+      insertionSort(array, start, end);
+    }
+    else {
+      int mid = start + (end - start) / 2;
+      hybridSort(array, start, mid);
+      hybridSort(array, mid + 1, end);
+      std::inplace_merge(array + start, array + mid + 1, array + end + 1);
+    }
   }
 
 }  // namespace csi281
-
 #endif /* sort_hpp */
+//I used code from https://gameguild.gg/p/dsa/divide-and-conquer as a reference
