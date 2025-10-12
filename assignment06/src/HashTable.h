@@ -66,6 +66,19 @@ namespace csi281 {
     // the original and not a copy
     void put(const K key, const V value) {
       // YOUR CODE HERE
+      int index = key_hash(key)%capacity;
+      for (auto& pair : backingStore[index]) {
+        if (pair.first == key) {
+          pair.second = value;
+          return;
+        }
+      }
+      backingStore[index].push_back(
+        {key, value});
+      count++;
+      if (getLoadFactor() > MAX_LOAD_FACTOR) {
+        resize(capacity * growthFactor);
+      }
     }
 
     // Get the item associated with a particular key
@@ -79,6 +92,13 @@ namespace csi281 {
     // the original and not a copy
     optional<V> get(const K &key) {
       // YOUR CODE HERE
+      int index = key_hash(key)%capacity;
+      for (auto& pair : backingStore[index]) {
+        if (pair.first == key) {
+          return pair.second;
+        }
+      }
+      return nullopt;
     }
 
     // Remove a key and any associated value from the hash table
@@ -89,6 +109,15 @@ namespace csi281 {
     // the original and not a copy
     void remove(const K &key) {
       // YOUR CODE HERE
+      int index = key_hash(key)%capacity;
+      auto& list = backingStore[index];
+      int sizeBeforeRemove = list.size();
+      list.remove_if([&key](const auto& pair) {
+        return pair.first == key;
+      });
+      if (list.size() < sizeBeforeRemove) {
+        count--;
+      }
     }
 
     // Calculate and return the load factor
@@ -123,6 +152,21 @@ namespace csi281 {
     // the backingStore for the first time
     void resize(int cap) {
       // YOUR CODE HERE
+      auto* oldBackingStore = backingStore;
+      int oldCapacity = capacity;
+      capacity = cap;
+      backingStore = new list<pair<K, V>>[capacity];
+      count = 0;
+      if (oldBackingStore != nullptr) {
+        for (int i = 0; i < oldCapacity; i++) {
+          for (auto& pair : oldBackingStore[i]) {
+            int newIndex = key_hash(pair.first)%capacity;
+            backingStore[newIndex].push_back(pair);
+            count++;
+          }
+        }
+        delete[] oldBackingStore;
+      }
     }
 
     // hash anything into an integer appropriate for
