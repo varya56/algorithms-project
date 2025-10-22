@@ -37,6 +37,24 @@ namespace csi281 {
   template <typename T> class Queue : public SequentialCollection<T> {
   public:
     // YOUR CODE HERE
+    void push(const T& value) override {
+      backingStore.push_back(value);
+    }
+    T pop() override {
+      if (backingStore.empty()) {
+        throw std::out_of_range("Attempt to pop from an empty queue.");
+      }
+      T value = backingStore.front();
+      backingStore.pop_front();
+      return value;
+    }
+    T& peek() override {
+      if (backingStore.empty()) {
+        throw std::out_of_range("Attempt to peek from an empty queue.");
+      }
+      return backingStore.front();
+    }
+
   protected:
     using SequentialCollection<T>::backingStore;
   };

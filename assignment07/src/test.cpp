@@ -47,6 +47,16 @@ TEST_CASE("Queue Tests", "[queue]") {
     // work properly in concert with getCount()
     // and remove()
     // YOUR CODE HERE
+    CHECK(q1.getCount() == 0);
+    q1.push(10);
+    q1.push(15);
+    q1.push(20);
+    CHECK(q1.getCount() == 3);
+    CHECK(q1.peek() == 10);
+    CHECK(q1.pop() == 10);
+    CHECK(q1.getCount() == 2);
+    q1.remove(20);
+    CHECK(q1.getCount() == 1);
   }
 
   SECTION("Queue w/ string tests") {
@@ -55,6 +65,15 @@ TEST_CASE("Queue Tests", "[queue]") {
     // work properly in concert with getCount()
     // and remove()
     // YOUR CODE HERE
+    CHECK(q2.getCount() == 0);
+    q2.push("hello");
+    q2.push("professor");
+    CHECK(q2.getCount() == 2);
+    CHECK(q2.peek() == "hello");
+    CHECK(q2.pop() == "hello");
+    CHECK(q2.getCount() == 1);
+    q2.remove("professor");
+    CHECK(q2.getCount() == 0);
   }
 }
 
@@ -65,6 +84,16 @@ TEST_CASE("Stack Tests", "[stack]") {
     // work properly in concert with getCount()
     // and remove()
     // YOUR CODE HERE
+    CHECK(s1.getCount() == 0);
+    s1.push(10);
+    s1.push(15);
+    s1.push(20);
+    CHECK(s1.getCount() == 3);
+    CHECK(s1.peek() == 20);
+    CHECK(s1.pop() == 20);
+    CHECK(s1.getCount() == 2);
+    s1.remove(10);
+    CHECK(s1.getCount() == 1);
   }
 
   SECTION("Stack w/ string tests") {
@@ -73,5 +102,14 @@ TEST_CASE("Stack Tests", "[stack]") {
     // work properly in concert with getCount()
     // and remove()
     // YOUR CODE HERE
+    CHECK(s2.getCount() == 0);
+    s2.push("hello");
+    s2.push("professor");
+    CHECK(s2.getCount() == 2);
+    CHECK(s2.peek() == "professor");
+    CHECK(s2.pop() == "professor");
+    CHECK(s2.getCount() == 1);
+    s2.remove("hello");
+    CHECK(s2.getCount() == 0);
   }
 }

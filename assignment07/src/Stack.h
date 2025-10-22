@@ -37,6 +37,24 @@ namespace csi281 {
   template <typename T> class Stack : public SequentialCollection<T> {
   public:
     // YOUR CODE HERE
+    void push(const T& value) override {
+      backingStore.push_back(value);
+    }
+    T pop() override {
+      if (backingStore.empty()) {
+        throw std::out_of_range("Attempt to pop from an empty stack.");
+      }
+      T value = backingStore.back();
+      backingStore.pop_back();
+      return value;
+    }
+    T& peek() override {
+      if (backingStore.empty()) {
+        throw std::out_of_range("Attempt to peek from an empty stack.");
+      }
+      return backingStore.back();
+    }
+
   protected:
     using SequentialCollection<T>::backingStore;
   };

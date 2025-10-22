@@ -1,10 +1,22 @@
+Varya Trakht
 Please write your answers in a file called "answers.txt" with your names
 at the top in this repository. Please number each answer.
 
 1. List 3 examples of a real world queue.
+1)a queue at the bank.
+2)a queue at the store checkout.
+3)a queue for a doctor's appointment.
 
 2. List 3 examples of a real world stack.
+1)the last book placed on the shelf is the first one picked
+2)parking garage when to move the first car that entered, all the cars that
+came in after it must leave one by one.
+3)the printer when the top paper prints first
 
 3. If a piece of software passes all of its unit tests does it necessarily work correctly? Why or why not?
+No, it does not necessarily work correctly since they check only specific pieces of code and
+not how these pieces interact.
 
 4. Why is a linked list better than a fixed-size array for implementing stacks and queues?
+The linked list is better than an array for insertions and deletions, that`s why it works better
+with stacks and queues.
