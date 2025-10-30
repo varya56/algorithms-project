@@ -36,7 +36,7 @@
 #include <stack>
 #include <unordered_map>
 #include <unordered_set>
-
+#include <cassert>
 #include "MemoryLeakDetector.h"
 
 using namespace std;
@@ -75,6 +75,10 @@ namespace csi281 {
     // if either is not in the graph, return false
     bool edgeExists(const V &from, const V &to) {
       // YOUR CODE HERE
+     if (adjacencyList.contains(from) && adjacencyList[from].contains(to)) {
+     return true;
+      }
+    return false;
     }
 
     using Path = list<V>;
@@ -105,8 +109,24 @@ namespace csi281 {
       // YOUR CODE HERE
       // TIP: Start by defining a frontier and putting start onto it.
       // TIP: Follow the pseudocode from the slides from class
+      stack<V> frontier;
+      frontier.push(start);
+      while (!frontier.empty()) {
+      V current = frontier.top();
+      frontier.pop();
+      if (current == goal) {
+        return pathMapToPath(explored, const_cast<V&>(goal));
+     }
+    for (const V &neighbor : neighbors(current)) {
+    if (explored.contains(neighbor)) {
+      continue;
     }
-
+    explored[neighbor] = current;
+    frontier.push(neighbor);
+   }
+}
+return nullopt;
+}
     // Perform a breadth-first search from *start*, looking for *goal*
     // Return a path if one is found using pathMathToPath (with explored)
     // or return nullopt if no path is found
@@ -120,7 +140,24 @@ namespace csi281 {
       // TIP: Start by defining a frontier and putting start onto it.
       // TIP: Follow the pseudocode from the slides from class
       // TIP: This should be very similar to dfs
+      queue<V> frontier;
+      frontier.push(start);
+      while (!frontier.empty()) {
+      V current = frontier.front();
+      frontier.pop();
+      if (current == goal) {
+      return pathMapToPath(explored,const_cast<V&>(goal));
+      }
+     for (const V &neighbor : neighbors(current)) {
+     if (explored.contains(neighbor)) {
+       continue;
+     }
+     explored[neighbor] = current;
+     frontier.push(neighbor);
     }
+}
+    return nullopt;
+}
 
     // Utility function if you need it
     void printExplored(unordered_map<V, V> um) {
