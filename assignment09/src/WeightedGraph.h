@@ -37,6 +37,7 @@
 #include <unordered_set>
 #include <utility>
 #include <vector>
+#include <cassert>
 
 #include "MemoryLeakDetector.h"
 
@@ -139,6 +140,21 @@ namespace csi281 {
       // from class, from your book, and you are free to
       // use other pseudocode as long as you cite it. Please
       // do not look at other C++ solutions.
+      while (!frontier.empty()) {
+        pair<W, V> current = frontier.top();
+        frontier.pop();
+        W distToCurrent = current.first;
+        V currentVertex = current.second;
+
+         for (auto neighbor : neighborsWithWeights(currentVertex)) {
+           V neighborVertex = neighbor.first;
+           W distFromCurrent = neighbor.second;
+          if (!weights.contains(neighborVertex) ||
+            weights[neighborVertex] > distToCurrent + distFromCurrent) {
+            weights[neighborVertex] = distToCurrent + distFromCurrent;
+            parents[neighborVertex] = currentVertex;
+            frontier.push(make_pair(distToCurrent + distFromCurrent, neighborVertex));}}
+      }
 
       return make_pair(parents, weights);
     }
