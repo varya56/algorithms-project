@@ -179,3 +179,42 @@ TEST_CASE("dijkstra() cityGraph2 Test", "[dijksta]") {
 // reuse cityGraph or cityGraph2. Cite any sources.
 // Make sure that your assertions are fairly comprehensive.
 // Look at the prior two tests as examples.
+TEST_CASE("dijkstra() gameLevels Test", "[dijksta]") {
+  WeightedGraph<string, int> gameLevels = WeightedGraph<string, int>();
+  gameLevels.addEdge("Level1", "Level2", 10);
+  gameLevels.addEdge("Level1", "SecretLevel", 15);
+  gameLevels.addEdge("Level2", "Level3", 9);
+  gameLevels.addEdge("Level2", "BonusLevel", 5);
+  gameLevels.addEdge("SecretLevel", "Level3", 12);
+  gameLevels.addEdge("BonusLevel", "Level3", 3);
+
+  cout << "------Game Levels------" << endl;
+  gameLevels.debugPrint();
+  auto resultPair = gameLevels.dijkstra("Level1");
+  auto parentResults = resultPair.first;
+  auto weightResults = resultPair.second;
+
+  CHECK(weightResults["Level1"] == 0);
+  CHECK(weightResults["Level2"] == 10);
+  CHECK(weightResults["SecretLevel"] == 15);
+  CHECK(weightResults["BonusLevel"] == 15);
+  CHECK(weightResults["Level3"] == 18);
+
+  auto path = gameLevels.pathMapToPath(parentResults, "Level3");
+  cout << "------Level Path------" << endl;
+  printPath(path);
+
+  CHECK(path.size() == 4);
+  CHECK(path.front() == "Level1");
+  CHECK(path.back() == "Level3");
+
+  auto it = path.begin();
+  auto last = path.front();
+  for (unsigned long i = 1; i < path.size(); i++) {
+    it++;
+    auto current = *it;
+    CHECK(gameLevels.edgeExists(last, current));
+    last = current;
+  }
+}
+
