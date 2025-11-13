@@ -128,10 +128,26 @@ namespace csi281 {
       // this aligns with the inner function visit() from the pseudo code in the slides
       auto visit = [&](V v) {
         // YOUR CODE HERE
+        visited.insert(v);
+        for (const auto &edge : adjacencyList[v]) {
+          if (edgeExists(edge.from, edge.to)) {
+            if (!visited.contains(edge.to)) {
+              frontier.push(edge);
+            }
+          }
+        }
       };
-
       // YOUR CODE HERE
-
+      visit(start);
+      while (!frontier.empty()) {
+        WeightedEdge edge = frontier.top();
+        frontier.pop();
+        if (visited.contains(edge.to)) {
+          continue;
+        }
+        solution.push_front(edge);
+        visit(edge.to);
+      }
       return solution;
     }
 

@@ -1,0 +1,51 @@
+Varya Trakht
+1. How can Jarnik's algorithm be re-configured to find the maximum-spanning-tree instead of the minimum-spanning-tree?
+To re-configure Jarnik's algorithm instead of selecting the edge with the minimum weight at
+each step, we must select the edge with the maximum weight.
+
+2. How is a minimum-spanning-tree different from a solution to The Traveling Salesman problem?
+The main difference is that a minimum-spanning-tree is a tree(acyclic), which means
+ it does not require to return to the starting point,
+ while The Traveling Salesman problem is a cycle.
+
+3. Rewrite 5 vertices from the weighted graph cityGraph2 from test.cpp in adjacency matrix form.
+You can enter a text table yourself in your answers file,
+or copy and paste a text table from https:
+//www.tablesgenerator.com/text_tables or add an additional image/spreadsheet file to your
+repository or put a link in question 3 to a Google Sheet. It's your call.
++---------------+---------+---------+---------------+-----------+-------------+
+|               | Seattle | Chicago | San Francisco | Riverside | Los Angeles |
++---------------+---------+---------+---------------+-----------+-------------+
+| Seattle       | 0       | 1737    | 678           | -         | -           |
++---------------+---------+---------+---------------+-----------+-------------+
+| Chicago       | 1737    | 0       | -             | -         | -           |
++---------------+---------+---------+---------------+-----------+-------------+
+| San Francisco | 678     | -       | 0             | 386       | 348         |
++---------------+---------+---------+---------------+-----------+-------------+
+| Riverside     | -       | -       | 386           | 0         | 50          |
++---------------+---------+---------+---------------+-----------+-------------+
+| Los Angeles   | -       | -       | 348           | 50        | 0           |
++---------------+---------+---------+---------------+-----------+-------------+
+
+4. What is the Big-O time complexity of Jarnik's algorithm when a priority queue (binary heap) is used?
+What about when it is not used? Why is there a difference?
+Big-O time complexity of Jarnik's algorithm when a priority queue is used is O((E+V)log V).
+Without a priority queue it becomes O(V^2). The difference is in
+extracting the minimum weight edge, since without a priority queue,
+the algorithm has to look through all the vertices to find the minimum, which is much slower.
+
+5. Why is Jarnik's algorithm a greedy algorithm?
+It is a greedy algorithm since it solves problems step by step, selecting
+the best possible choice at each moment.
+
+6. Jarnik's algorithm is commonly known as Prim's algorithm, even though Jarnik discovered
+it and published it decades before Prim rediscovered it. Research another
+algorithm that has a different common name from its original discoverer.
+What is the purpose of the algorithm and why did its original creator not get credit?
+Other algorithm that has a different common name from its original discoverer is Boruvka's algorithm(1926).
+It is sometimes called Sollin's algorithm because it was rediscovered by George Sollin in the 1960s.
+It is a greedy algorithm that is used to find the minimum spanning tree.
+"A spanning tree means all vertices must be connected. So the two disjoint subsets
+(discussed above) of vertices must be connected to make a Spanning Tree.
+And they must be connected with the minimum weight edge to make it a Minimum Spanning Tree."
+(from https://www.geeksforgeeks.org/dsa/boruvkas-algorithm-greedy-algo-9/)
